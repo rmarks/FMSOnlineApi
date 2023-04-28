@@ -29,11 +29,16 @@ public class CompanyListRepository
                 .Where(c => c.CompanyName.Contains(searchString, StringComparison.OrdinalIgnoreCase));
         }
 
-        int pageCount = (int)Math.Ceiling((decimal)query.Count() / pageSize);
+        int pageCount = 1;
+        
+        if (page > 0 && pageSize > 0)
+        {
+            pageCount = (int)Math.Ceiling((decimal)query.Count() / pageSize);
 
-        query = query
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize);
+            query = query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize);
+        }
 
         return new CompanyListModel { PagedList = query.ToList(), PageCount = pageCount };
     }
