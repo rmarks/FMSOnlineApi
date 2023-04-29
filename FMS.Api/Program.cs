@@ -17,7 +17,7 @@ var app = builder.Build();
 
 app.UseCors(options =>
 {
-    options.WithOrigins("https://localhost:7194");
+    options.WithOrigins("https://localhost:7194", "https://blue-bush-00da4e503.3.azurestaticapps.net");
 });
 
 // Configure the HTTP request pipeline.
